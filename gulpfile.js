@@ -8,12 +8,12 @@ const babel = require("gulp-babel");
 const terser = require("gulp-terser");
 const browsersync = require("browser-sync").create();
 
-sass.compiler = require("sass");
+sass.compiler = require('sass');
 
 // Sass Task
 async function scssTask() {
   return src("app/scss/style.scss", { sourcemaps: true })
-    .pipe(sass())
+    .pipe(sass().on('error', sass.logError))
     .pipe(postcss([autoprefixer(), cssnano()]))
     .pipe(dest("dist", { sourcemaps: "." }));
 }
